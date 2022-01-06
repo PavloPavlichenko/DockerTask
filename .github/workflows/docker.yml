@@ -18,7 +18,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
         
         
     - name: Docker build
@@ -26,4 +26,11 @@ jobs:
       run: |
         docker build . -t ipashkayounot/git_sync:latest
     
-     
+    - name: Docker Push
+      run: |
+        docker push ipashkayounot/git_sync:latest
+    
+    - name: Docker logout
+    
+      run: |
+        docker logout
