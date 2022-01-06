@@ -1,0 +1,29 @@
+name: Updating_Docker_Image
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  docker_pushing:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Docker Login
+    
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        
+        
+    - name: Docker build
+    
+      run: |
+        docker build . -t ipashkayounot/git_sync:latest
+    
+     
