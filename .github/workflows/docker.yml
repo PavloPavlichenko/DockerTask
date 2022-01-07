@@ -13,11 +13,10 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
         
-      - name: Move into site directory
-        run: cd www
-        
       - name: Run Linters
         uses: actions-hub/stylelint@master
+        env:
+          CONFIG_PATH: /www
 
   docker_pushing:
     name: Pushing Docker Image
