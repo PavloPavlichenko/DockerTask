@@ -26,19 +26,12 @@ jobs:
       run: |
         docker build . -t ipashkayounot/git_sync:latest
     
+    
     - name: Docker Push
+    
       run: |
         docker push ipashkayounot/git_sync:latest
         
-    - name: Aws Instance Docker Update
-      uses: peterkimzz/aws-ssm-send-command@master
-      with:
-          aws-region: eu-north-1
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          instance-ids: ${{ secrets.INSTANCE_ID }}
-          
-          command: sudo docker ps -a
     
     - name: Docker logout
     
