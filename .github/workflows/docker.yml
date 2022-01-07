@@ -38,7 +38,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           instance-ids: ${{ secrets.INSTANCE_ID }}
           
-          command: sudo docker ps
+          command: sudo docker ps -a
     
     - name: Docker logout
     
