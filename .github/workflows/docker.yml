@@ -16,7 +16,7 @@ jobs:
       - name: Run Linters
         uses: actions-hub/stylelint@master
         env:
-          INDENT_SPACES: 4
+          INDENT_SPACE: 4
           PATTERN: "**/*.css"
 
   docker_pushing:
