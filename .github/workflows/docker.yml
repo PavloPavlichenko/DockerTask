@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint:
-    - name: Linting Dockerfile
+    name: Linting Dockerfile
     runs-on: ubuntu-latest
     steps: 
     - name: Checkout
