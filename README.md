@@ -1,7 +1,7 @@
 # **Synchronized website on AWS hosting**
 It's a simple personal static website (html + css) with instruments to run it on AWS EC2 service and monitore GPU usage and trace logs.
 
-<img src="https://github.com/PavloPavlichenko/DockerTask/workflows/Updating_Docker_Image/badge.svg?branch=master"> <br>
+![](https://img.shields.io/github/last-commit/PavloPavlichenko/DockerTask) ![](https://img.shields.io/github/commit-activity/y/PavloPavlichenko/DockerTask)
 # **Running and Testing Locally**
 ### Pre-reqs
 - Be using Linux, WSL or MacOS with bash
@@ -54,13 +54,13 @@ export AWS_DEFAULT_REGION="eu-north-1"
 
 ## Configure your main.tf file
 Change region (optional)
-```json
+```
 provider "aws" {
     region = "eu-north-2" 
 }
 ```
 Change key pair and docker hub where image was saved and change time for watchtower to check for new images (optional) 
-```json
+```
 resource "aws_instance" "web"{
     ...
     iam_instance_profile   = aws_iam_instance_profile.logging_profile.name       // optional feature
@@ -113,12 +113,12 @@ The following features could be enabled:
 Add logging group in [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/)
 
 Change main.tf docker run by adding additional flags
-```json
+```bash
 docker run -d --log-driver=awslogs --log-opt awslogs-group=`group name` -p 80:80 dockerlogin/reponame:latest
 ```
 
 Creating additional resources
-```json
+```
 // role to connect to ec2 instance
 resource "aws_iam_role" "logging_role"{
     // inner code
@@ -133,7 +133,7 @@ resource "aws_iam_instance_profile" "logging_profile"{
 }
 ```
 Attach profile to instance
-```json
+```
 resource "aws_instance" "web"{
     ...
     iam_instance_profile   = aws_iam_instance_profile.logging_profile.name
@@ -146,7 +146,7 @@ Your logs would be saved in Cloudwatch -> Log Groups -> Group Name -> Needed str
 You can monitor CPU usage and recieve notifications depending on conditions (for this one we are going to have a cloudwatch alarm metric that looks for average CPU to exceed 80% in 2 evaluation periods that last 120 seconds each)
 
 Add cloudwatch metric alarm resource to main.tf
-```json
+```
 resource "aws_cloudwatch_metric_alarm" "ec2_cpu"{
     // inner code
 }
