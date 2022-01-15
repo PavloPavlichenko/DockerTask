@@ -6,19 +6,27 @@ on:
     - main
 
 jobs:
+  # lint:
+  #   name: Linting Dockerfile
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #   - name: Checkout
+  #     uses: actions/checkout@master
+  #   - name: lint
+  #     uses: luke142367/Docker-Lint-Action@v1.0.0
+  #     with:
+  #       target: Dockerfile
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
-    name: Linting Dockerfile
+    name: Linting css
     runs-on: ubuntu-latest
-    steps: 
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: lint
-      uses: luke142367/Docker-Lint-Action@v1.0.0
-      with:
-        target: Dockerfile
+    steps:
+    - uses: actions-hub/stylelint@master
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        INDENT_SPACES: 4
+        PATTERN: "www/*.css"
+  
   docker_pushing:
     name: Pushing Docker Image
     runs-on: ubuntu-latest
