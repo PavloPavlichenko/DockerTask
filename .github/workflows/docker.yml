@@ -22,11 +22,14 @@ jobs:
     name: Linting css
     runs-on: ubuntu-latest
     steps:
-    - uses: actions-hub/stylelint@master
+    - name: Check out Git repository
+      uses: actions/checkout@v2
+    - name: Run linter
+      uses: actions-hub/stylelint@master
       env:
         INDENT_SPACES: 4
         PATTERN: "www/*.css"
-  
+
   docker_pushing:
     name: Pushing Docker Image
     runs-on: ubuntu-latest
