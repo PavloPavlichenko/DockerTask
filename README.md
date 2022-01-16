@@ -54,23 +54,23 @@ export AWS_DEFAULT_REGION="eu-north-1"
 
 ## Configure your main.tf file
 Change region (optional)
-```
+```tf
 provider "aws" {
     region = "eu-north-2" 
 }
 ```
 Change key pair and docker hub where image was saved and change time for watchtower to check for new images (optional) 
-```
+```tf
 resource "aws_instance" "web"{
-    ...
+    
     iam_instance_profile   = aws_iam_instance_profile.logging_profile.name       // optional feature
     key_name               = "key-pair-name"
-    ...
+    
     user_date = 
-    ...
+    
     docker run -d -p 80:80 dockerlogin/reponame:latest
     docker run -d --name watchtower ... -i 10 // your time in seconds
-    ...
+    
 }
 ```
 
@@ -78,14 +78,14 @@ Resources `aws_iam_role`, `aws_iam_policy_attachment`, `aws_iam_instance_profile
 
 ## Configure your github workflow
 Change tag for builded image
-```
+```tf
  - name: Docker build
     
       run: |
         docker build . -t dockerlogin/reponame:latest
 ```
 Push by renamed tag
-```
+```tf
  - name: Docker Push
     
       run: |
@@ -118,7 +118,7 @@ docker run -d --log-driver=awslogs --log-opt awslogs-group=`group name` -p 80:80
 ```
 
 Creating additional resources
-```
+```tf
 // role to connect to ec2 instance
 resource "aws_iam_role" "logging_role"{
     // inner code
@@ -133,11 +133,11 @@ resource "aws_iam_instance_profile" "logging_profile"{
 }
 ```
 Attach profile to instance
-```
+```tf
 resource "aws_instance" "web"{
-    ...
+    
     iam_instance_profile   = aws_iam_instance_profile.logging_profile.name
-    ...
+    
 }
 ```
 Your logs would be saved in Cloudwatch -> Log Groups -> Group Name -> Needed stream
@@ -146,7 +146,7 @@ Your logs would be saved in Cloudwatch -> Log Groups -> Group Name -> Needed str
 You can monitor CPU usage and recieve notifications depending on conditions (for this one we are going to have a cloudwatch alarm metric that looks for average CPU to exceed 80% in 2 evaluation periods that last 120 seconds each)
 
 Add cloudwatch metric alarm resource to main.tf
-```
+```tf
 resource "aws_cloudwatch_metric_alarm" "ec2_cpu"{
     // inner code
 }
@@ -154,3 +154,5 @@ resource "aws_cloudwatch_metric_alarm" "ec2_cpu"{
 More about configuring you can read in [documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm)
 
 You can check for alarms in Cloudwatch -> Alarms
+
+[Link to site](http://gitsyncdev.pp.ua/)
