@@ -59,19 +59,19 @@ provider "aws" {
     region = "eu-north-2" 
 }
 ```
-Change key pair and docker hub where image was saved and change time for watchtower to check for new images (optional) 
+Change key pair
 ```tf
 resource "aws_instance" "web"{
     
     iam_instance_profile   = aws_iam_instance_profile.logging_profile.name       // optional feature
     key_name               = "key-pair-name"
     
-    user_date = 
-    
-    docker run -d -p 80:80 dockerlogin/reponame:latest
-    docker run -d --name watchtower ... -i 10 // your time in seconds
-    
 }
+```
+Change docker hub where image was saved and change frequency for watchtower to check for new images (optional) 
+```bash
+docker run -d -p 80:80 dockerlogin/reponame:latest
+docker run -d --name watchtower ... -i 10 // your time in seconds
 ```
 
 Resources `aws_iam_role`, `aws_iam_policy_attachment`, `aws_iam_instance_profile` and `aws_cloudwatch_metric_alarm` are optional features
