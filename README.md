@@ -68,7 +68,7 @@ resource "aws_instance" "web"{
     
 }
 ```
-Change docker hub where image was saved and change frequency for watchtower to check for new images (optional) 
+Change docker hub where image was saved and change frequency for watchtower to check for new images (optional) in docker.sh
 ```bash
 docker run -d -p 80:80 dockerlogin/reponame:latest
 docker run -d --name watchtower ... -i 10 // your time in seconds
