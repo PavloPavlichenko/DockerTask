@@ -99,7 +99,7 @@ hr {
 .skills__lang::after {
   content: "";
   position: absolute;
-  background-image: 'url(./Images/dots1.svg)';
+  background-image: url(./Images/dots1.svg);
   background-repeat: no-repeat;
   width: 80px;
   height: 80px;
@@ -116,7 +116,7 @@ hr {
 .dots3::after {
   content: "";
   position: absolute;
-  background-image: 'url(./Images/dots3.svg)';
+  background-image: url(./Images/dots3.svg);
   background-repeat: no-repeat;
   width: 80px;
   height: 80px;
@@ -126,7 +126,7 @@ hr {
 .dots4::after {
   content: "";
   position: absolute;
-  background-image: 'url(./Images/dots4.svg)';
+  background-image: url(./Images/dots4.svg);
   background-repeat: no-repeat;
   width: 80px;
   height: 80px;
